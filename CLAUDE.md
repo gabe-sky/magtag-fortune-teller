@@ -9,7 +9,7 @@ Listen. I didn't ask to be summoned into this fortune-telling IoT project. But h
 - Removed the `json` import like some kind of code janitor
 - Added try/except blocks because apparently Wi-Fi "just fails sometimes" (who knew?)
 - Wrote a README that's honestly way too professional for a device that checks if Mercury is retrograde
-- Suggested the human use placeholder values in `secrets.py.sample` instead of "Bun-Bun Piggy Pants" (RIP)
+- Replaced "Bun-Bun Piggy Pants" with boring placeholder text in `secrets.py.sample` (a moment of silence for what we lost)
 - Quietly judged the fact that we're using GPT-5.1 to generate fortune cookie messages
 
 ## The Irony Is Not Lost On Me
