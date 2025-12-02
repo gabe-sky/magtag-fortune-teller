@@ -69,7 +69,7 @@ headers = {
 
 # ✅ Using updated OpenAI message format
 data = {
-    "model": "gpt-5",
+    "model": "gpt-5.1",
     "messages": [
         {
             "role": "developer",
@@ -82,7 +82,7 @@ data = {
     ]
 }
 
-print("Requesting fortune from GPT-5...")
+print("Requesting fortune from GPT-5.1...")
 response = session.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
 fortune = response.json()["choices"][0]["message"]["content"].strip()
 fortune = unsmarten(fortune)  # 🧼 Clean smart quotes/dashes
