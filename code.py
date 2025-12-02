@@ -1,5 +1,10 @@
+# MagTag Fortune Teller
+# Displays a daily AI-generated fortune on an Adafruit MagTag e-ink display.
+# Fetches a whimsical fortune from OpenAI's GPT-5.1 API, picks a random
+# favored zodiac sign, and checks Mercury's retrograde status.
+# Updates once every 12 hours via deep sleep for battery efficiency.
+
 import time
-import json
 import ssl
 import socketpool
 import wifi
