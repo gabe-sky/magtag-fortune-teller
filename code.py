@@ -51,9 +51,23 @@ zodiac_signs = [
 ]
 
 # Connect to Wi-Fi
-print("Connecting to Wi-Fi...")
-wifi.radio.connect(secrets["ssid"], secrets["password"])
-print("Connected!")
+try:
+    print("Connecting to Wi-Fi...")
+    wifi.radio.connect(secrets["ssid"], secrets["password"])
+    print("Connected!")
+except Exception as e:
+    print(f"Wi-Fi connection failed: {e}")
+    fortune = "The stars are clouded. Check your connection."
+    favored_sign = "Unknown"
+    retro_message = "Network unavailable."
+    # Skip to display
+    magtag = MagTag()
+    magtag.graphics.set_background(0xFFFFFF)
+    error_label = label.Label(terminalio.FONT, text=fortune, color=0x000000, x=10, y=64)
+    magtag.splash.append(error_label)
+    magtag.refresh()
+    time.sleep(5)
+    magtag.exit_and_deep_sleep(43200)
 
 # HTTP session
 pool = socketpool.SocketPool(wifi.radio)
@@ -82,23 +96,32 @@ data = {
     ]
 }
 
-print("Requesting fortune from GPT-5.1...")
-response = session.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
-fortune = response.json()["choices"][0]["message"]["content"].strip()
-fortune = unsmarten(fortune)  # 🧼 Clean smart quotes/dashes
+# Get fortune from OpenAI with error handling
+try:
+    print("Requesting fortune from GPT-5.1...")
+    response = session.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
+    fortune = response.json()["choices"][0]["message"]["content"].strip()
+    fortune = unsmarten(fortune)  # 🧼 Clean smart quotes/dashes
+except Exception as e:
+    print(f"OpenAI request failed: {e}")
+    fortune = "The universe whispers mysteries today."
 
 # Pick random zodiac sign
 favored_sign = random.choice(zodiac_signs)
 
-# Get Mercury retrograde status
-print("Checking Mercury retrograde...")
-retro_response = session.get("https://mercuryretrogradeapi.com")
-retro_json = retro_response.json()
+# Get Mercury retrograde status with error handling
+try:
+    print("Checking Mercury retrograde...")
+    retro_response = session.get("https://mercuryretrogradeapi.com")
+    retro_json = retro_response.json()
 
-if retro_json.get("is_retrograde"):
-    retro_message = "Mercury is retrograde. Stay flexible."
-else:
-    retro_message = "Mercury is direct. Manifest boldly."
+    if retro_json.get("is_retrograde"):
+        retro_message = "Mercury is retrograde. Stay flexible."
+    else:
+        retro_message = "Mercury is direct. Manifest boldly."
+except Exception as e:
+    print(f"Mercury retrograde check failed: {e}")
+    retro_message = "Mercury status unknown."
 
 # Display setup
 magtag = MagTag()
