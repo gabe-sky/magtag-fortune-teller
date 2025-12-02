@@ -2,6 +2,8 @@
 
 A whimsical daily fortune display for the Adafruit MagTag e-ink device. Each day, your MagTag will show you an AI-generated fortune cookie message, a randomly selected favored zodiac sign, and the current Mercury retrograde status.
 
+**Note:** This project requires an OpenAI API key to generate fortunes. You'll need to [sign up for an OpenAI account](https://platform.openai.com/signup) and [create an API key](https://platform.openai.com/api-keys) before using this project. I'm happy to supply the code, but footing the bill for the AI is up to you.
+
 ## Features
 
 - **AI-Generated Fortunes**: Fetches unique, whimsical fortunes from OpenAI's GPT-5.1 API
