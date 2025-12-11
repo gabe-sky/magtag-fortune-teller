@@ -1,6 +1,6 @@
 # MagTag Fortune Teller
 # Displays a daily AI-generated fortune on an Adafruit MagTag e-ink display.
-# Fetches a whimsical fortune from OpenAI's GPT-5.1 API, picks a random
+# Fetches a whimsical fortune from OpenAI's GPT-5.2 API, picks a random
 # favored zodiac sign, and checks Mercury's retrograde status.
 # Updates once every 12 hours via deep sleep for battery efficiency.
 
@@ -88,7 +88,7 @@ headers = {
 
 # ✅ Using updated OpenAI message format
 data = {
-    "model": "gpt-5.1",
+    "model": "gpt-5.2",
     "messages": [
         {
             "role": "developer",
@@ -103,7 +103,7 @@ data = {
 
 # Get fortune from OpenAI with error handling
 try:
-    print("Requesting fortune from GPT-5.1...")
+    print("Requesting fortune from GPT-5.2...")
     response = session.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
     fortune = response.json()["choices"][0]["message"]["content"].strip()
     fortune = unsmarten(fortune)  # 🧼 Clean smart quotes/dashes
