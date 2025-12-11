@@ -55,6 +55,13 @@ zodiac_signs = [
     "Sagittarius", "Capricorn", "Aquarius", "Pisces"
 ]
 
+# Display "waking up..." while we get the network up
+magtag = MagTag()
+magtag.graphics.set_background(0xFFFFFF)
+startup_text = label.Label(terminalio.FONT, text="waking up...", color=0x000000, x=80, y=64)
+magtag.splash.append(startup_text)
+magtag.refresh()
+
 # Connect to Wi-Fi
 try:
     print("Connecting to Wi-Fi...")
@@ -65,9 +72,9 @@ except Exception as e:
     fortune = "The stars are clouded. Check your connection."
     favored_sign = "Unknown"
     retro_message = "Network unavailable."
-    # Skip to display
-    magtag = MagTag()
-    magtag.graphics.set_background(0xFFFFFF)
+    # Clear startup message and show error
+    while len(magtag.splash) > 0:
+        magtag.splash.pop()
     error_label = label.Label(terminalio.FONT, text=fortune, color=0x000000, x=10, y=64)
     magtag.splash.append(error_label)
     magtag.refresh()
@@ -101,6 +108,15 @@ data = {
     ]
 }
 
+# Hide startup message by replacing its text with empty string
+startup_text.text = ""
+
+# Display "prognosticating..." while we hit the API
+magtag.graphics.set_background(0xFFFFFF)
+thinking_text = label.Label(terminalio.FONT, text="prognosticating...", color=0x000000, x=80, y=64)
+magtag.splash.append(thinking_text)
+magtag.refresh()
+
 # Get fortune from OpenAI with error handling
 try:
     print("Requesting fortune from GPT-5.2...")
@@ -128,9 +144,6 @@ except Exception as e:
     print(f"Mercury retrograde check failed: {e}")
     retro_message = "Mercury status unknown."
 
-# Display setup
-magtag = MagTag()
-magtag.graphics.set_background(0xFFFFFF)  # Clear display
 
 # Wrap and center fortune
 wrapped_fortune = wrap_text(fortune, max_chars=35)
@@ -156,6 +169,9 @@ for i, line in enumerate(footer_lines):
     y = SCREEN_HEIGHT - (2 - i) * LINE_HEIGHT - 2
     lbl = label.Label(terminalio.FONT, text=line, color=0x000000, x=x, y=y)
     footer_group.append(lbl)
+
+# Hide thinking message by replacing its text with empty string
+thinking_text.text = ""
 
 # Show everything
 magtag.splash.append(fortune_group)
