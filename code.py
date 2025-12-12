@@ -69,14 +69,8 @@ try:
     print("Connected!")
 except Exception as e:
     print(f"Wi-Fi connection failed: {e}")
-    fortune = "The stars are clouded. Check your connection."
-    favored_sign = "Unknown"
-    retro_message = "Network unavailable."
-    # Clear startup message and show error
-    while len(magtag.splash) > 0:
-        magtag.splash.pop()
-    error_label = label.Label(terminalio.FONT, text=fortune, color=0x000000, x=10, y=64)
-    magtag.splash.append(error_label)
+    # Show error message and exit
+    startup_text.text = "Network unavailable"
     magtag.refresh()
     time.sleep(5)
     magtag.exit_and_deep_sleep(43200)
@@ -108,13 +102,8 @@ data = {
     ]
 }
 
-# Hide startup message by replacing its text with empty string
-startup_text.text = ""
-
-# Display "prognosticating..." while we hit the API
-magtag.graphics.set_background(0xFFFFFF)
-thinking_text = label.Label(terminalio.FONT, text="prognosticating...", color=0x000000, x=80, y=64)
-magtag.splash.append(thinking_text)
+# Replace startup message with "prognosticating..."
+startup_text.text = "prognosticating..."
 magtag.refresh()
 
 # Get fortune from OpenAI with error handling
@@ -144,7 +133,6 @@ except Exception as e:
     print(f"Mercury retrograde check failed: {e}")
     retro_message = "Mercury status unknown."
 
-
 # Wrap and center fortune
 wrapped_fortune = wrap_text(fortune, max_chars=35)
 fortune_height = len(wrapped_fortune) * LINE_HEIGHT
@@ -170,8 +158,8 @@ for i, line in enumerate(footer_lines):
     lbl = label.Label(terminalio.FONT, text=line, color=0x000000, x=x, y=y)
     footer_group.append(lbl)
 
-# Hide thinking message by replacing its text with empty string
-thinking_text.text = ""
+# Hide startup message by replacing its text with empty string
+startup_text.text = ""
 
 # Show everything
 magtag.splash.append(fortune_group)

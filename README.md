@@ -53,8 +53,8 @@ If any network request fails, the device displays appropriate fallback messages 
 
 ## Customization
 
-- **Fortune Style**: Edit the prompt on line 77 of `code.py` to change the fortune generation style
-- **Sleep Duration**: Modify the deep sleep duration (currently 43200 seconds / 12 hours) on line 162
+- **Fortune Style**: Edit the prompt on line 83 of `code.py` to change the fortune generation style
+- **Sleep Duration**: Modify the deep sleep duration (currently 43200 seconds / 12 hours) on line 182
 - **Display Layout**: Adjust `SCREEN_WIDTH`, `SCREEN_HEIGHT`, and `LINE_HEIGHT` constants for different text layouts
 
 ## License
