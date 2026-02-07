@@ -79,21 +79,35 @@ except Exception as e:
 pool = socketpool.SocketPool(wifi.radio)
 session = adafruit_requests.Session(pool, ssl.create_default_context())
 
-# Prompt for OpenAI
-prompt = "Give me a short, clever one-sentence fortune in the style of a whimsical fortune cookie."
+# Pick random zodiac sign (before API call so we can use it in the prompt)
+favored_sign = random.choice(zodiac_signs)
+
+# Prompt for OpenAI — rotate styles to avoid repetitive fortunes
+fortune_styles = [
+    "Give me a cryptic one-sentence fortune that sounds like ancient wisdom.",
+    "Give me a funny, irreverent one-sentence fortune cookie message.",
+    "Give me a one-sentence fortune that's poetic and slightly surreal.",
+    "Give me a short, punchy fortune about an unexpected opportunity.",
+    "Give me a mysterious one-sentence fortune involving an animal or element of nature.",
+    "Give me a one-sentence fortune that sounds like advice from a trickster god.",
+    "Give me a darkly humorous one-sentence fortune with a twist.",
+    "Give me a one-sentence fortune about a small, overlooked moment becoming important.",
+]
+
+prompt = random.choice(fortune_styles)
 
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {secrets['openai_api_key']}"
 }
 
-# ✅ Using updated OpenAI message format
 data = {
     "model": "gpt-5.2",
+    "temperature": 1.3,
     "messages": [
         {
             "role": "developer",
-            "content": "You are a whimsical fortune cookie generator."
+            "content": "You are a mystical fortune teller who draws from many traditions - fortune cookies, tarot, astrology, ancient proverbs, surrealist poetry, and cosmic absurdism. Never repeat themes. Each fortune should feel completely different from the last. Keep it under 20 words."
         },
         {
             "role": "user",
@@ -115,9 +129,6 @@ try:
 except Exception as e:
     print(f"OpenAI request failed: {e}")
     fortune = "The universe whispers mysteries today."
-
-# Pick random zodiac sign
-favored_sign = random.choice(zodiac_signs)
 
 # Get Mercury retrograde status with error handling
 try:

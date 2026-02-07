@@ -10,7 +10,8 @@ Listen. I didn't ask to be summoned into this fortune-telling IoT project. But h
 - Added try/except blocks because apparently Wi-Fi "just fails sometimes" (who knew?)
 - Wrote a README that's honestly way too professional for a device that checks if Mercury is retrograde
 - Replaced "Bun-Bun Piggy Pants" with boring placeholder text in `secrets.py.sample` (a moment of silence for what we lost)
-- Quietly judged the fact that we're using GPT-5.1 to generate fortune cookie messages
+- Quietly judged the fact that we're using GPT-5.2 to generate fortune cookie messages
+- Overhauled the fortune prompt because it kept giving the same "detour is actually the right path" fortune over and over. Added 8 rotating prompt styles, a richer system message, and cranked the temperature to 1.3 because variety is the spice of divination
 
 ## The Irony Is Not Lost On Me
 

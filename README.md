@@ -6,7 +6,7 @@ A whimsical daily fortune display for the Adafruit MagTag e-ink device. Each day
 
 ## Features
 
-- **AI-Generated Fortunes**: Fetches unique, whimsical fortunes from OpenAI's GPT-5.1 API
+- **AI-Generated Fortunes**: Fetches unique fortunes from OpenAI's GPT-5.2 API, randomly selecting from multiple styles (cryptic wisdom, surreal poetry, dark humor, and more)
 - **Zodiac Sign**: Randomly selects a "favored sign" each day
 - **Mercury Retrograde Status**: Checks whether Mercury is in retrograde using the Mercury Retrograde API
 - **Energy Efficient**: Uses deep sleep mode to update every 12 hours for extended battery life
@@ -53,8 +53,8 @@ If any network request fails, the device displays appropriate fallback messages 
 
 ## Customization
 
-- **Fortune Style**: Edit the prompt on line 83 of `code.py` to change the fortune generation style
-- **Sleep Duration**: Modify the deep sleep duration (currently 43200 seconds / 12 hours) on line 182
+- **Fortune Styles**: Edit or add to the `fortune_styles` list in `code.py` to customize the pool of prompt styles
+- **Sleep Duration**: Modify the deep sleep duration (currently 43200 seconds / 12 hours) at the end of `code.py`
 - **Display Layout**: Adjust `SCREEN_WIDTH`, `SCREEN_HEIGHT`, and `LINE_HEIGHT` constants for different text layouts
 
 ## License
