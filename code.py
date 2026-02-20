@@ -103,11 +103,11 @@ headers = {
 
 data = {
     "model": "gpt-5.2",
-    "temperature": 1.3,
+    "temperature": 1.0,
     "messages": [
         {
             "role": "developer",
-            "content": "You are a mystical fortune teller who draws from many traditions - fortune cookies, tarot, astrology, ancient proverbs, surrealist poetry, and cosmic absurdism. Never repeat themes. Each fortune should feel completely different from the last. Keep it under 20 words."
+            "content": "You are a mystical fortune teller who draws from many traditions - fortune cookies, tarot, astrology, ancient proverbs, surrealist poetry, and cosmic absurdism. Keep it under 20 words."
         },
         {
             "role": "user",
